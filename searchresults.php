@@ -40,8 +40,8 @@
                     while ($row = $result->fetch()) {
                         echo "<tr><td>" . $row["AirlineID"] .
                             "</td><td>" . $row["3DigitNumber"] .
-                            "</td><td>" . $row["ArrivingAirport"] .
                             "</td><td>" . $row["DepartingAirport"] .
+                            "</td><td>" . $row["ArrivingAirport"] .
                             "</td></tr>";
                     }
                     ?>
@@ -50,6 +50,11 @@
                 <br>
                 <a href="flightsearch.php">back</a>
                 <a href="airline.php">home</a>
+
+                <?php
+                $connection = NULL;
+                ?>
+
             </div>
         </section>
     </main>

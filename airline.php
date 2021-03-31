@@ -38,7 +38,12 @@
                     <input type="submit" value="Check Open Seats">
                 </form>
 
+                <form action="fleetcheck.php" class="btn" method="post">
+                    <input type="submit" value="BONUS: Check a Fleet">
+                </form>
+
                 <img src="plane.png" class="picture" alt="">
+                <p>Sean Pollen - 20102356 - Made for CMPE332</p>
             </div>
         </section>
     </main>

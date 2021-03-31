@@ -14,23 +14,21 @@
         <section class="glass">
             <?php include 'connectdb.php'; ?>
 
-            <h1 class="title">Update Departure Time</h1>
-            <h1 class="subtitle2">Select a flight to update</h1>
+            <h1 class="title">Fleets!</h1>
+            <h1 class="subtitle2">Select an airline</h1>
 
-            <form action="updateresults.php" method="post">
+            <form action="fleetresults.php" method="post">
                 <?php
-                $query = 'SELECT AirlineID, 3DigitNumber, ActualDeparture from departure';
+                $query = 'SELECT AirlineID, Name from airline';
                 $result = $connection->query($query);
 
                 while ($row = $result->fetch()) {
-                    echo '<input type="radio" name="flight" value="';
-                    echo $row["AirlineID"], $row["3DigitNumber"];
-                    echo '">' . $row["AirlineID"] . " " . $row["3DigitNumber"] . " departing at " . $row["ActualDeparture"] . "<br>";
+                    echo '<input type="radio" name="airline" value="';
+                    echo $row["AirlineID"];
+                    echo '">' . $row["Name"] . "<br>";
                 }
                 ?>
-                <h1 class="subtitle2">What is the updated departure time?</h1>
-                <input type="time" name="newdeparture">
-                <input type="submit" value="Update Flight">
+                <input type="submit" value="Plane Check">
             </form>
             <img src="plane.png" class="picture" alt="">
             <br>
@@ -41,11 +39,6 @@
             ?>
         </section>
     </main>
-
-    <?php
-    $connection = NULL;
-    ?>
-
 </body>
 
 </html>

@@ -10,48 +10,44 @@
 </head>
 
 <body>
-    <?php
-    include 'connectdb.php';
-    ?>
+    <main class="page">
+        <section class="glass">
+            <?php
+            include 'connectdb.php';
+            ?>
+            <h1 class="title">Flight Added!</h1>
+            <h1 class="subtitle">Now how about that airplane food?</h1>
+            <?php
+            $whichAirline = $_POST["airline"];
+            $whereFrom = $_POST["airportFrom"];
+            $whereTo = $_POST["airportTo"];
+            $flightNum = $_POST["flightnum"];
+            $departure = $_POST["departuretime"];
+            $arrival = $_POST["arrivaltime"];
+            $planenum = $_POST["planenum"];
+            $days = (isset($_POST['days'])) ? $_POST['days'] : array();
 
-    <?php
-    $whichAirline = $_POST["airline"];
-    $whereFrom = $_POST["airportFrom"];
-    $whereTo = $_POST["airportTo"];
-    $flightNum = $_POST["flightnum"];
-    $departure = $_POST["departuretime"];
-    $arrival = $_POST["arrivaltime"];
-    $planenum = $_POST["planenum"];
-    $days = (isset($_POST['days'])) ? $_POST['days'] : array();
+            $query = 'INSERT INTO flight VALUES ("' . $flightNum . '","' . $whichAirline . '","' . $planenum . '")';
+            $query2 = 'INSERT INTO arrival VALUES ("' . $whichAirline . '","' . $flightNum . '","' . $whereTo . '","' . $arrival . '","' . $arrival . '")';
+            $query3 = 'INSERT INTO departure VALUES ("' . $whichAirline . '","' . $flightNum . '","' . $whereFrom . '","' . $departure . '","' . $departure . '")';
+            $numRows = $connection->exec($query);
+            $numRows = $connection->exec($query2);
+            $numRows = $connection->exec($query3);
 
-    echo "<p>" . $whichAirline . "</p>";
-    echo "<p>" . $whereFrom . "</p>";
-    echo "<p>" . $whereTo . "</p>";
-    echo "<p>" . $flightNum . "</p>";
-    echo "<p>" . $departure . "</p>";
-    echo "<p>" . $arrival . "</p>";
-    echo "<p>" . $planenum . "</p>";
+            if (count($days) > 0) {
+                foreach ($days as $day) {
+                    $query4 = 'INSERT INTO days VALUES ("' . $whichAirline . '", "' . $flightNum . '", "' . $day . '")';
+                    $numRows = $connection->exec($query4);
+                }
+            }
+            ?>
 
-    $query = 'INSERT INTO flight VALUES ("' . $flightNum . '","' . $whichAirline . '","' . $planenum . '")';
-    $query2 = 'INSERT INTO arrival VALUES ("' . $whichAirline . '","' . $flightNum . '","' . $whereTo . '","' . $arrival . '","' . $arrival . '")';
-    $query3 = 'INSERT INTO departure VALUES ("' . $whichAirline . '","' . $flightNum . '","' . $whereFrom . '","' . $departure . '","' . $departure . '")';
-    $numRows = $connection->exec($query);
-    $numRows = $connection->exec($query2);
-    $numRows = $connection->exec($query3);
+            <img src="plane.png" class="picture" alt="">
 
-    if (count($days) > 0) {
-        foreach ($days as $day) {
-            $query4 = 'INSERT INTO days VALUES ("' . $whichAirline . '", "' . $flightNum . '", "' . $day . '")';
-            $numRows = $connection->exec($query4);
-        }
-    }
-    ?>
-
-    <p>Your flight was added! Amazing!</p>
-
-    <a href="flightsearch.php">back</a>
-    <a href="airline.php">home</a>
-
+            <a href="flightsearch.php">back</a>
+            <a href="airline.php">home</a>
+        </section>
+    </main>
 </body>
 
 </html>

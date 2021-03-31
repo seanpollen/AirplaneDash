@@ -38,6 +38,10 @@
             <a href="airline.php">home</a>
         </section>
     </main>
+
+    <?php
+                $connection = NULL;
+                ?>
 </body>
 
 </html>
